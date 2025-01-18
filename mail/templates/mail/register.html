@@ -1,27 +1,62 @@
-{% extends "mail/layout.html" %}
+{% extends "mail/layout.html" %} {% block body %}
 
-{% block body %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <h2 class="text-center mb-4">Register</h2>
 
-    <h2>Register</h2>
+      {% if message %}
+      <div class="alert alert-danger" role="alert">{{ message }}</div>
+      {% endif %}
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
-
-    <form action="{% url 'register' %}" method="post">
+      <form action="{% url 'register' %}" method="post" class="card shadow p-4">
         {% csrf_token %}
-        <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        <div class="form-group mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+          />
         </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
+        <div class="form-group mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            class="form-control"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter your password"
+            required
+          />
         </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        <div class="form-group mb-3">
+          <label for="confirmation" class="form-label">Confirm Password</label>
+          <input
+            class="form-control"
+            type="password"
+            name="confirmation"
+            id="confirmation"
+            placeholder="Re-enter your password"
+            required
+          />
         </div>
-        <input class="btn btn-primary" type="submit" value="Register">
-    </form>
+        <div class="d-grid">
+          <input class="btn btn-primary" type="submit" value="Register" />
+        </div>
+      </form>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+      <div class="text-center mt-3">
+        <small
+          >Already have an account?
+          <a href="{% url 'login' %}">Log in here</a>.</small
+        >
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
